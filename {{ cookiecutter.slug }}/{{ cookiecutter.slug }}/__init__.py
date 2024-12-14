@@ -8,13 +8,13 @@ import tomli
 
 # Walk out the the module base path
 with open(Path().cwd() / "config.toml", "rb") as f:
-    app_config = tomli.load(f)
+    config = tomli.load(f)
 
 
 db_engine = create_engine(
-    f"postgresql+psycopg2://{app_config['db']['user']}:{app_config['db']['password']}"
-    f"@{app_config['db']['host']}:{app_config['db']['port']}/{app_config['db']['name']}",
-    connect_args={'options': f'-csearch_path={app_config["app"]["name"]},public'}
+    f"postgresql+psycopg2://{config['db']['user']}:{config['db']['password']}"
+    f"@{config['db']['host']}:{config['db']['port']}/{config['db']['name']}",
+    connect_args={'options': f'-csearch_path={config["app"]["name"]},public'}
 )
 
 
